@@ -9,11 +9,13 @@ public class PLA : MonoBehaviour
     public bool isGrounded = false;
     Rigidbody2D rb;
     Animator anim;
+    Vector2 startPosM;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        startPosM = transform.position;
 
     }
 
@@ -74,5 +76,9 @@ public class PLA : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+    public void ResetMessi()
+    {
+        transform.position = startPosM;
     }
 }
