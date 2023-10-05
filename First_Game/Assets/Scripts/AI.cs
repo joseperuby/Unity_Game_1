@@ -25,6 +25,7 @@ public class AI : MonoBehaviour
     void Update()
     {
         Move();
+
         Jump();
     }
 
@@ -60,10 +61,9 @@ public class AI : MonoBehaviour
 
     private void Jump()
     {
-
         float dist = Vector2.Distance(Ball.transform.position, transform.position);
 
-        if (dist < 0.5f && isGrounded == true)
+        if (dist < 1.5f && isGrounded == true)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;

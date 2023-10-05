@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public int messiScore = 0, ronaldoScore = 0;
-    public float timer = 30f;
+    public float timeRemaining = 60f;
+    public TextMeshProUGUI timer;
     public TextMeshProUGUI scoreText;
     public string score;
     // Start is called before the first frame update
@@ -19,12 +21,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        if (timeRemaining > 0)
         {
-            Debug.Log("Game Over");
+            timeRemaining -= Time.deltaTime;
+            UpdateTime(timeRemaining);
+        }
+        else if (timeRemaining <= 0f)
+        {
+            SceneManager.LoadSceneAsync(2);
         }
         score = messiScore.ToString() + " - " + ronaldoScore.ToString();
         scoreText.text = score.ToString();
+    }
+
+    public void UpdateTime(float timeLeft)
+    {
+        timer.text = "Time remaining: " + timeLeft;
     }
 }
